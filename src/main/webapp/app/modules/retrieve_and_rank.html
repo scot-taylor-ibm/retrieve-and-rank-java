@@ -1,0 +1,79 @@
+<!----------------------------------------------------------------------------
+   Copyright IBM Corp. 2015
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+------------------------------------------------------------------------------>
+
+<section class="dialog-body">
+    <div class="container">
+        <h2>Choose a query for comparison</h2>
+        <p class="lead">
+            Select or enter a question from the <a>Cranfield Collection</a> data set. The Cranfield Collection data set contains approximately 1400 abstracts of
+            aerodynamics journal articles and a set of 225 end user questions mapped to their most relevant journal articles. Out of the 225 question and
+            article pairs, <a>machine learning training</a> occurred on 200 pairs. The remaining pairs were not part of the machine learning training exercise
+            in order to validate the results of teh model - this is known as the <a>Validation set</a>.
+        </p>
+       
+        <form role="form" ng-submit="rnrController.submit()">
+        <select name="repeatSelect" ng-model="rnrController.userQuery" ng-change="rnrController.sampleClicked()" ng-options="q.query for q in rnrController.sampleQueries">
+        </select>
+            <input class="form-control rnr-query-input" id="query" type="text" placeholder="Type your query here" ng-model="rnrController.query"
+                autocorrect="off" autocomplete="off" />
+        </form>
+        <div ng-if="rnrController.retrieved">
+            <h3>
+                Comparing Results for: <span class="rnr-query">"{{rnrController.query}}"</span>
+            </h3>
+            <h4>Search results without training</h4>
+            <p>The results below are based on manually tuned rules for document relevance.</p>
+            <table class="rnr-results-table">
+                <tr>
+                    <th class="rnr-results-table-header">Retrieve Results</th>
+                    <th class="rnr-results-rank-col">Index when Ranked</th>
+                    <th class="rnr-results-rank-col">GT Relevance</th>
+                </tr>
+                <tr ng-repeat="retrieved in rnrController.retrieved">
+                    <td class="rnr-results-table-cell"><b>{{retrieved.title}}</b>
+                        <hr />
+                        <body-text content="{{retrieved.body}}"></body-text></td>
+                    <td class="rnr-results-table-cell-score"><span>{{retrieved.finalRank > -1 ? retrieved.finalRank : "N/A"}}</span></td>
+                    <td class="rnr-results-table-cell-score"><span ng-if="retrieved.relevance > -1" class="rnr-circle-{{retrieved.relevance}}">{{retrieved.relevance
+                            > -1 ? retrieved.relevance : "N/A"}}</span></td>
+                </tr>
+            </table>
+
+            <h4>Retrieve results after training</h4>
+            <p>
+                The results below are based on automatically learned rules for computing document relevance using this training set.<br> <i>Refer to
+                    our documentation to learn more about creating and using your own training data set.</i>
+            </p>
+            <table class="rnr-results-table">
+                <tr>
+                    <th class="rnr-results-table-header">Ranked Results</th>
+                    <th class="rnr-results-rank-col">Solr index</th>
+                    <th class="rnr-results-rank-col">GT Relevance</th>
+                </tr>
+                <tr ng-repeat="rank in rnrController.ranked">
+                    <td class="rnr-results-table-cell"><b>{{rank.title}}</b>
+                        <hr>
+                        <body-text content="{{rank.body}}"></body-text></td>
+                    <td class="rnr-results-table-cell-score"><span>{{rank.solrRank}}</span></td>
+                    <td class="rnr-results-table-cell-score"><span ng-if="rank.relevance > -1" class="rnr-circle-{{rank.relevance}}">{{rank.relevance}}</span></td>
+                </tr>
+            </table>
+        </div>
+        <br> <br> <a class="dialog-link" href="./legal/l2r_TermsOfUse.html">Terms &amp; Conditions</a> | <a class="dialog-link"
+            href="http://www.ibm.com/privacy/us/en/">Privacy</a> | <a class="dialog-link"
+            href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/">Built with IBM Watson</a>
+    </div>
+</section>

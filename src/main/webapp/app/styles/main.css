@@ -1,0 +1,86 @@
+.rnr-results-table-cell, .rnr-results-table-cell-score, .rnr-results-table-header{
+    padding-top: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
+
+.rnr-results-table-header{
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.rnr-results-rank-col{
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.rnr-results-table-cell-score{
+    vertical-align: top;
+    border-right: dotted 1px;
+    border-left: dotted 1px;
+}
+hr{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-color: #A9A9A9;
+}
+
+.rnr-query-input{
+    width: 100%;
+    margin-top: 20px;
+    height: 50px;
+    padding: 15px;
+}
+
+.rnr-circle-0, .rnr-circle-1, .rnr-circle-2, .rnr-circle-3, .rnr-circle-4{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: #4ac03e;
+    display: block;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+}
+.rnr-circle-1{
+    background-color: #359b28;
+}
+
+.rnr-circle-2{
+    background-color: #247619;
+}
+
+.rnr-circle-3{
+    background-color: #18500f;
+}
+
+.rnr-circle-4{
+    background-color: #0f3109;
+}
+.rnr-sample-query-link{
+    cursor: pointer;
+}
+
+.rnr-results-table{
+    border: 1px #000000 solid;
+}
+
+.rnr-query{
+    font-size: smaller;
+}
+
+.rnr-not-truncated{
+    display:none;
+}
+
+.rnr-truncated{
+}
+
+.rnr-queries{
+    width: 100%;
+}
+
+.rnr-showMoreShowLessLink{
+    cursor: pointer;
+}
