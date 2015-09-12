@@ -111,7 +111,7 @@ public class RetrieveAndRankProxyResource {
             JsonObject services = new JsonParser().parse(envServices).getAsJsonObject();
             UtilityFunctions.logger.info(Messages.getString("RetrieveAndRankProxyResource.VCAP_SERVICES_JSONOBJECT_SUCCESS")); //$NON-NLS-1$
             JsonArray arr = (JsonArray) services.get("retrieve_and_rank"); //$NON-NLS-1$
-            if (arr.size() > 0) {
+            if (arr != null && arr.size() > 0) {
                 services = arr.get(0).getAsJsonObject();
                 JsonObject credentials = services.get("credentials").getAsJsonObject(); //$NON-NLS-1$
                 R_N_R_BASE_URL = credentials.get("url").getAsString(); //$NON-NLS-1$

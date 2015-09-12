@@ -13,17 +13,90 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 ------------------------------------------------------------------------------>
+ <header class="_demo--heading">
+	<div class="_demo--container">
+		<a class="wordmark" href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/">
+			<span class="wordmark--left">IBM</span>
+			<span class="wordmark--right">Watson Developer Cloud</span>
+		</a>
+		<nav class="heading-nav" role="menubar">
+			<li class="base--li heading-nav--li" role="presentation">
+				<a class="heading-nav--item" href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/services-catalog.html" role="menuitem">
+					Services
+				</a>
+			</li>
+			<li class="base--li heading-nav--li" role="presentation">
+				<a class="heading-nav--item" href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/" role="menuitem">
+					Docs
+				</a>
+			</li>
+			<li class="base--li heading-nav--li" role="presentation">
+				<a class="heading-nav--item" href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/gallery.html" role="menuitem">
+					App Gallery
+				</a>
+			</li>
+			<li class="base--li heading-nav--li" role="presentation">
+				<a class="heading-nav--item" href="https://developer.ibm.com/watson/" role="menuitem">
+					Community
+				</a>
+			</li>
+		</nav>
+	</div>
+</header>
+
+  <div class="_demo--banner">
+	<div class="_demo--container">
+		<div class="banner--service-icon-container">
+			<img class="banner--service-icon" src="images/service-icon.svg" alt="[SERVICE NAME] API Icon">
+		</div>
+		<div class="banner--service-info">
+			<h1 class="banner--service-title base--h1">
+				<img class="banner--service-icon_INLINE" src="images/service-icon.svg" alt="Retrieve and Rank API Icon">
+				Retrieve and Rank
+			</h1>
+			<div class="banner--service-description">
+			The IBM Watson Retrieve and Rank service helps users find the most relevant information for their query by using a combination of search and machine learning to find “signals” in the data.
+			</div>
+			<div class="banner--service-resource">
+				<span class="icon icon-link"></span>
+				<strong>Resources:</strong>
+			</div>
+			<div class="banner--service-links">
+				<li class="base--li banner--service-link-item">
+					<a href="[NEED LINK HERE]" class="base--a">API Overview</a>
+				</li>
+				<li class="base--li banner--service-link-item">
+					<a href="[NEED LINK HERE]" class="base--a">Documentation</a>
+				</li>
+				<li class="base--li banner--service-link-item">
+					<a href="[NEED LINK HERE]" class="base--a">Fork and Deploy on Bluemix</a>
+				</li>
+				<li class="base--li banner--service-link-item">
+					<a href="[NEED LINK HERE]" class="base--a">Fork on Github</a>
+				</li>
+			</div>
+		</div>
+	</div>
+</div>
+  <div class="_demo--container">
+	<article class="_content base--article">
+		<h2 class="base--h2">
+			Compare machine learning search and standard search
+		</h2>
+		<p class="base--p">
+			This service was trained on part of the <a href="" class="base--a">Cranfield Collection</a> data. The collection contains questions paired with answers about aerodynamics.
+		</p>
+
+		<h3 class="base--h3">
+			Input
+		</h3>
+
+	</article>
+	
+</div>
 
 <section class="dialog-body">
-    <div class="container">
-        <h2>Choose a query for comparison</h2>
-        <p class="lead">
-            Select or enter a question from the <a>Cranfield Collection</a> data set. The Cranfield Collection data set contains approximately 1400 abstracts of
-            aerodynamics journal articles and a set of 225 end user questions mapped to their most relevant journal articles. Out of the 225 question and
-            article pairs, <a>machine learning training</a> occurred on 200 pairs. The remaining pairs were not part of the machine learning training exercise
-            in order to validate the results of teh model - this is known as the <a>Validation set</a>.
-        </p>
-       
+    <div class="container">       
         <form role="form" ng-submit="rnrController.submit()">
         <select name="repeatSelect" ng-model="rnrController.userQuery" ng-change="rnrController.sampleClicked()" ng-options="q.query for q in rnrController.sampleQueries">
         </select>
