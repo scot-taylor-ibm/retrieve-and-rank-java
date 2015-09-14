@@ -78,7 +78,7 @@
 		</div>
 	</div>
 </div>
-  <div class="_demo--container">
+<div class="_demo--container">
 	<article class="_content base--article">
 		<h2 class="base--h2">
 			Compare machine learning search and standard search
@@ -91,18 +91,29 @@
 			Input
 		</h3>
 
+		<div class="input">
+			<form role="form" ng-submit="rnrController.submit()">
+				<a href="" class="input--question-generator base--a" ng-model="rnrController.userQuery" ng-click="rnrController.sampleClicked()">
+	                Get a random question about aerodynamics
+	            </a>
+	            <div class="input--container">
+	                <p id="query" class="input--question base--p">{{rnrController.query}}</p>
+	            </div>
+			</form>
+		</div>
+
 	</article>
 	
 </div>
 
 <section class="dialog-body">
     <div class="container">       
-        <form role="form" ng-submit="rnrController.submit()">
+      <!--   <form role="form" ng-submit="rnrController.submit()">
         <select name="repeatSelect" ng-model="rnrController.userQuery" ng-change="rnrController.sampleClicked()" ng-options="q.query for q in rnrController.sampleQueries">
         </select>
             <input class="form-control rnr-query-input" id="query" type="text" placeholder="Type your query here" ng-model="rnrController.query"
                 autocorrect="off" autocomplete="off" />
-        </form>
+        </form> -->
         <div ng-if="rnrController.retrieved">
             <h3>
                 Comparing Results for: <span class="rnr-query">"{{rnrController.query}}"</span>

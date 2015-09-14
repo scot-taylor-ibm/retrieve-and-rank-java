@@ -22,7 +22,6 @@
         var result = null;
         var ranked = null;
         var retrieved = null;
-        var randomIndex = null;
         self.selectedQuery = {};
         self.sampleQueries = [];
         self.initSampleQueries = function () {
@@ -35,18 +34,11 @@
             });
         }
         self.sampleClicked = function () {
-            randomIndex = Math.floor(Math.random() * self.sampleQueries.length);
-            window.console.log('self.sampleQueries[0]: ' + self.sampleQueries[0]);
-            window.console.log('randomIndex: ' + randomIndex);
-             self.query = self.sampleQueries[randomIndex].query;
-             self.queryId = self.sampleQueries[randomIndex].queryId;
-             self.userQuery = self.sampleQueries[randomIndex];
-             self.submit();
-//             if (self.userQuery) {
-//                 self.query = self.userQuery.query;
-//                 self.queryId = self.userQuery.queryId;
-//                 self.submit();
-//             }
+            if (self.userQuery) {
+                self.query = self.userQuery.query;
+                self.queryId = self.userQuery.queryId;
+                self.submit();
+            }
         };
 
         self.submit = function () {
@@ -90,7 +82,7 @@
         $scope.$watch(function () {
             return self.selectedQuery;
         }, function () {
-            //self.sampleClicked(self.selectedQuery);
+            self.sampleClicked(self.selectedQuery);
         }, false);
     };
 
