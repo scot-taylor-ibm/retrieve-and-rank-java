@@ -1,0 +1,1 @@
+src/it/java needed for maven bld.. dummy file needed in order to persist folder in src control.
