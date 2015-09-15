@@ -97,7 +97,7 @@
 	                Get a random question about aerodynamics
 	            </a>
 	            <div class="input--container">
-	                <p id="query" class="input--question base--p">{{rnrController.queryTxt}}</p>
+	                <p id="query" class="input--question base--p">{{rnrController.query}}</p>
 	            </div>
 			</form>
 		</div>
@@ -156,10 +156,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="results--space"></div>
 			</div>
 
-            <!-- <table class="rnr-results-table">
+            <table class="rnr-results-table">
                 <tr>
                     <th class="rnr-results-table-header">Retrieve Results</th>
                     <th class="rnr-results-rank-col">Index when Ranked</th>
@@ -173,7 +172,7 @@
                     <td class="rnr-results-table-cell-score"><span ng-if="retrieved.relevance > -1" class="rnr-circle-{{retrieved.relevance}}">{{retrieved.relevance
                             > -1 ? retrieved.relevance : "N/A"}}</span></td>
                 </tr>
-            </table> -->
+            </table>
 
             <!-- <h4>Retrieve results after training</h4>
             <p>
@@ -183,28 +182,6 @@
             <div class="toggle">
 				<div class="toggle--item active">
 					Standard search
-				</div>
-			</div>
-			<div class="results">
-				<div class="results--item-container" ng-repeat="retrieved in rnrController.retrieved">
-					<div class="results--item-text">
-						{{retrieved.title}}
-					</div>
-					<div class="results--item-score">
-						<div class="results--item-score-title">
-							Domain expert review
-						</div>
-						<div class="results--item-score-value">
-							<div class="results--item-score-bar" ng-class="{'green': {{retrieved.relevance}} > 0}">
-							</div>
-							<div class="results--item-score-bar" ng-class="{'green': {{retrieved.relevance}} > 1}">
-							</div>
-							<div class="results--item-score-bar" ng-class="{'green': {{retrieved.relevance}} > 2}">
-							</div>
-							<div class="results--item-score-bar" ng-class="{'green': {{retrieved.relevance}} > 3}">
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
             <!-- <table class="rnr-results-table">

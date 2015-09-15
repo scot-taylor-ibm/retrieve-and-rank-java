@@ -36,17 +36,11 @@
         }
         self.sampleClicked = function () {
             randomIndex = Math.floor(Math.random() * self.sampleQueries.length);
-            window.console.log('self.sampleQueries[0]: ' + self.sampleQueries[0]);
-            window.console.log('randomIndex: ' + randomIndex);
-             self.query = self.sampleQueries[randomIndex].query;
-             self.queryId = self.sampleQueries[randomIndex].queryId;
-             self.userQuery = self.sampleQueries[randomIndex];
-             self.submit();
-//             if (self.userQuery) {
-//                 self.query = self.userQuery.query;
-//                 self.queryId = self.userQuery.queryId;
-//                 self.submit();
-//             }
+            self.queryTxt = self.sampleQueries[randomIndex].query;
+            self.query = self.sampleQueries[randomIndex].query;
+            self.queryId = self.sampleQueries[randomIndex].queryId;
+            self.userQuery = self.sampleQueries[randomIndex];
+            self.submit();
         };
 
         self.submit = function () {
