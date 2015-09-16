@@ -1,8 +1,10 @@
 applications:
-- disk_quota: 1024M
-  host: watson-retrieve-and-rank-demo
-  name: watson-retrieve-and-rank-demo
+- services:
+  - Retrieve and Rank-aw
+  disk_quota: 1024M
+  host: watson-rnr-demo
+  name: watson-rnr-demo
   path: target/rnr-demo.war
-  domain: stage1.mybluemix.net
+  domain: mybluemix.net
   instances: 1
   memory: 512M
