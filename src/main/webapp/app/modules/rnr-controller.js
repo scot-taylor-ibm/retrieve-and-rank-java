@@ -81,6 +81,15 @@
             }
         };
 
+        // $('.results--see-more').click(function(e){
+        //     e.preventDefault();
+        //     var self = $(this);
+        //     var resultsItemContainer = self.closest('.results--item-container');
+
+        //     self.toggleClass('results--see-more_SHOW');
+        //     resultsItemContainer.find('.results--more-info').toggle('slow');
+        // });
+
         $scope.$watch(function () {
             return self.selectedQuery;
         }, function () {
