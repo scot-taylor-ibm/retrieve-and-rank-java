@@ -59,9 +59,9 @@
                 delete self.query;
                 delete self.userQuery;
                 delete self.queryId;
-                top = document.getElementById('inputSection').offsetTop;
-                window.scrollTo(0, top);
             });
+            top = document.getElementById('inputSection').offsetTop;
+            window.scrollTo(0, top);
         };
 
         self.toggleContent = function (event) {
