@@ -1,6 +1,4 @@
 applications:
-- services:
-  - Retrieve and Rank-aw
   disk_quota: 1024M
   host: watson-rnr-demo
   name: watson-rnr-demo
