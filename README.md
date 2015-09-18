@@ -1,5 +1,5 @@
 # Retrieve and Rank Demo app
-The Retrieve and Rank demo application showcases the best practices in building search application which makes use of Natural Language Processing. Here's a [quick demo](http://watson-rnr-demo.mybluemix.net/rnr-demo/dist/index.html#/).
+The Retrieve and Rank demo application shows how to use a machine learning model on top of Solr to provide improved results. Here's a [quick demo](http://watson-rnr-demo.mybluemix.net/rnr-demo/dist/index.html#/).
 
 The Retrieve and Rank service helps users find the most relevant information for their query by using a combination of search and machine learning algorithms to detect "signals" in the data. Built on top of Apache Solr, developers load their data into the service, train a machine learning model based on known relevant results, then leverage this model to provide improved results to their end users based on their question or query.
 
