@@ -135,14 +135,22 @@
 									Domain expert review
 								</div>
 								<div class="results--item-score-value">
-									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 0}">
+									<!-- <div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 0}">
 									</div>
 									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 1}">
 									</div>
 									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 2}">
 									</div>
 									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 3}">
-									</div>
+									</div> -->
+									<div class="results--item-score-bar" ng-class="{{rank.relevance}} > 0 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{rank.relevance}} > 1 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{rank.relevance}} > 2 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{rank.relevance}} > 3 ? 'green':''">
+                                    </div>
 								</div>
 							</div>
 						</div>
@@ -173,14 +181,14 @@
 									Domain expert review
 								</div>
 								<div class="results--item-score-value">
-									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 0}">
-									</div>
-									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 1}">
-									</div>
-									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 2}">
-									</div>
-									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 3}">
-									</div>
+									<div class="results--item-score-bar" ng-class="{{retrieved.relevance}} > 0 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{retrieved.relevance}} > 1 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{retrieved.relevance}} > 2 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{retrieved.relevance}} > 3 ? 'green':''">
+                                    </div>
 								</div>
 							</div>
 						</div>
