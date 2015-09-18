@@ -1,7 +1,7 @@
 # Retrieve and Rank Demo app
 The Retrieve and Rank demo application showcases the best practices in building search application which makes use of Natural Language Processing. Here's a [quick demo](http://watson-rnr-demo.mybluemix.net/rnr-demo/dist/index.html#/).
 
-The application uses the Watson Retrieve and Rank service to find 'hits' (results) in a corpus of data for a specific query (from the user) and then reorder those results based on machine learning algorithms.
+The Retrieve and Rank service helps users find the most relevant information for their query by using a combination of search and machine learning algorithms to detect "signals" in the data. Built on top of Apache Solr, developers load their data into the service, train a machine learning model based on known relevant results, then leverage this model to provide improved results to their end users based on their question or query.
 
 ## How it works
 The application is configured to use the "Cranfield data set" which is a public domain data set.. Further text here to explain the data, and how the ranker is trained..
