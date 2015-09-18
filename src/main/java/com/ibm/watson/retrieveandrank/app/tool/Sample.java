@@ -1203,7 +1203,7 @@ public class Sample {
 
         SOLR_CLUSTER_ID = clusterStatus.getSolrClusterId();
         // poll until status is ready
-        while ((clusterStatus = lifecycleClient.pollSolrCluster(SOLR_CLUSTER_ID))
+        while ((clusterStatus = lifecycleClient.pollSolrCluster(clusterStatus.getSolrCluster()))
                 .getSolrClusterStatus() != Status.READY) {
             System.out.println("Cluster not ready yet.  This takes a while...");
             Thread.sleep(5000);
