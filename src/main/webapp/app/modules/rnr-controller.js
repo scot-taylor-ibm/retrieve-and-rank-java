@@ -64,7 +64,7 @@
             });
         };
 
-        self.showMore = function (event) {
+        self.toggleContent = function (event) {
             var target = null;
             var myself = null;
             var resultsItemContainer = null;
@@ -76,22 +76,6 @@
                 resultsItemContainer.find('.results--more-info').toggle('slow');
             }
         };
-
-        self.showLess = function (event) {
-            var target = null;
-            if (event && event.target) {
-                target = event.target;
-                target = target.parentElement;
-                target.style.display = 'none';
-                target.previousSibling.style.display = 'block';
-            }
-        };
-
-        $scope.$watch(function () {
-            return self.selectedQuery;
-        }, function () {
-            //self.sampleClicked(self.selectedQuery);
-        }, false);
     };
 
     angular.module('rnr.controller', [ 'gettext', 'lodash', 'ngRoute', 'ngSanitize', 'rnr.service' ]).config(

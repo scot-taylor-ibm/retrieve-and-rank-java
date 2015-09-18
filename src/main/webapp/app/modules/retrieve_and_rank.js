@@ -19,7 +19,6 @@
   angular.module('retrieve_and_rank', [
     'templates',
     'rnr.service',
-    'rnr.controller',
-    'rnr.bodyText'
+    'rnr.controller'
   ]);
 }());
