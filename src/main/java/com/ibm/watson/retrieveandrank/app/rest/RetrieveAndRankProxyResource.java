@@ -64,7 +64,7 @@ import com.google.common.io.LineReader;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.ibm.watson.retrieveandrank.app.payload.Answer;
+import com.ibm.watson.retrieveandrank.app.payload.RankResultPayload;
 import com.ibm.watson.retrieveandrank.app.payload.IncomingQueryPayload;
 import com.ibm.watson.retrieveandrank.app.payload.RetrieveAndRankPayload;
 import com.ibm.watson.retrieveandrank.app.payload.SampleQueriesPayload;
@@ -270,9 +270,9 @@ public class RetrieveAndRankProxyResource {
                     JsonArray answers = jo.get("answers").getAsJsonArray();
                     //We only want to fix at most 3 results
                     int len = Math.min(answers.size(), 3);
-                    ArrayList<Answer> answerList = new ArrayList<>();
+                    ArrayList<RankResultPayload> answerList = new ArrayList<>();
                     for (int i = 0; i < len; i++) {
-                        Answer a = new Answer();
+                        RankResultPayload a = new RankResultPayload();
                         JsonObject ans = answers.get(i).getAsJsonObject();
                         a.setAnswerId(ans.get("answer_id").getAsString());
                         a.setScore(ans.get("score").getAsFloat());
@@ -307,13 +307,13 @@ public class RetrieveAndRankProxyResource {
                 try (CSVReader reader = new CSVReader(new InputStreamReader(IOUtils.toInputStream(new String(arr))), CSV_DELIM, CSVWriter.NO_QUOTE_CHARACTER)) {
                     String[] columns = reader.readNext(); //read header
                     columns = reader.readNext(); //read first row
-                    ArrayList<Answer> answerList = new ArrayList<>();
+                    ArrayList<RankResultPayload> answerList = new ArrayList<>();
                     int i = 0;
                     while (columns != null && columns.length > 1) {
                         String id = columns[0];
                         solrRank.add(id);
                         if(i++ < 3){
-                            Answer a = new Answer();
+                            RankResultPayload a = new RankResultPayload();
                             a.setAnswerId(id);
                             a.setScore(Float.parseFloat(columns[1]));
                             a.setSolrRank(i);
@@ -340,12 +340,12 @@ public class RetrieveAndRankProxyResource {
                 //We need to go through all results and add the solr/rank position
                 //This allows us to show the position of the result in the opposing search..
                 //For instance we can say result X in the ranked results was at position k in the solr results
-                for (Answer answer : payload.getRanked_results()) {
+                for (RankResultPayload answer : payload.getRanked_results()) {
                     idsOfDocsToRetrieve.add(answer.getAnswerId());
                     answer.setSolrRank(solrRank.indexOf(answer.getAnswerId()));//add 1 as we don't want -
                 }
 
-                for (Answer answer : payload.getSolr_results()) {
+                for (RankResultPayload answer : payload.getSolr_results()) {
                     idsOfDocsToRetrieve.add(answer.getAnswerId());
                     answer.setFinalRank(finalRank.indexOf(answer.getAnswerId())); //add 1 so we don't end up with zero index in ui
                 }
@@ -364,12 +364,12 @@ public class RetrieveAndRankProxyResource {
                     idsToDocs.put(result.id, result);
                 }
                 //Update the solr and rank results with full info
-                for (Answer answer : payload.getRanked_results()) {
+                for (RankResultPayload answer : payload.getRanked_results()) {
                     answer.setBody(idsToDocs.get(answer.getAnswerId()).body);
                     answer.setTitle(idsToDocs.get(answer.getAnswerId()).title);
                 }
 
-                for (Answer answer : payload.getSolr_results()) {
+                for (RankResultPayload answer : payload.getSolr_results()) {
                     answer.setBody(idsToDocs.get(answer.getAnswerId()).body);
                     answer.setTitle(idsToDocs.get(answer.getAnswerId()).title);
                 }

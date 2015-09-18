@@ -5,8 +5,8 @@ import java.util.List;
 public class RetrieveAndRankPayload {
     private String query;
     private int num_solr_results;
-    private List<Answer> solr_results;
-    private List<Answer> ranked_results;
+    private List<RankResultPayload> solr_results;
+    private List<RankResultPayload> ranked_results;
 
     public String getQuery() {
         return query;
@@ -24,19 +24,19 @@ public class RetrieveAndRankPayload {
         this.num_solr_results = num_solr_results;
     }
 
-    public List<Answer> getSolr_results() {
+    public List<RankResultPayload> getSolr_results() {
         return solr_results;
     }
 
-    public void setSolr_results(List<Answer> solr_results) {
+    public void setSolr_results(List<RankResultPayload> solr_results) {
         this.solr_results = solr_results;
     }
 
-    public List<Answer> getRanked_results() {
+    public List<RankResultPayload> getRanked_results() {
         return ranked_results;
     }
 
-    public void setRanked_results(List<Answer> ranked_results) {
+    public void setRanked_results(List<RankResultPayload> ranked_results) {
         this.ranked_results = ranked_results;
     }
 }
