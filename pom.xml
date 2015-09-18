@@ -1,302 +1,329 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.ibm.watson.app</groupId>
-    <artifactId>rnr-demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
-    <name>rnr-demo</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ibm.watson.app</groupId>
+	<artifactId>rnr-demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>rnr-demo</name>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <skipITs>false</skipITs>
-    </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<skipITs>false</skipITs>
+	</properties>
 
-    <repositories>
-        <repository>
-            <id>Liberty</id>
-            <name>Liberty Repository</name>
-            <url>http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/maven/repository/</url>
-        </repository>
-    </repositories>
+	<repositories>
+		<repository>
+			<id>Liberty</id>
+			<name>Liberty Repository</name>
+			<url>http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/maven/repository/</url>
+		</repository>
+	</repositories>
 
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <warName>rnr-demo</warName>
-                    <packagingExcludes>app/</packagingExcludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.9.1</version>
-                <executions>
-                    <execution>
-                        <!-- Add source directory for integration tests -->
-                        <id>add-test-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-test-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src/it/java</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>0.0.23</version>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<warName>rnr-demo</warName>
+					<packagingExcludes>app/</packagingExcludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.9.1</version>
+				<executions>
+					<execution>
+						<!-- Add source directory for integration tests -->
+						<id>add-test-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/it/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>0.0.23</version>
 
-                <!-- add optional <configuration> here -->
+				<!-- add optional <configuration> here -->
 
-                <executions>
-                    <execution>
-                        <id>install node and npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
 
-                        <phase>generate-resources</phase>
+						<phase>generate-resources</phase>
 
-                        <configuration>
-                            <nodeVersion>v0.12.2</nodeVersion>
-                            <npmVersion>2.7.6</npmVersion>
-                        </configuration>
-                    </execution>
+						<configuration>
+							<nodeVersion>v0.12.2</nodeVersion>
+							<npmVersion>2.7.6</npmVersion>
+						</configuration>
+					</execution>
 
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
 
-                        <phase>generate-resources</phase>
+						<phase>generate-resources</phase>
 
-                        <configuration>
-                            <!-- arguments here -->
-                            <arguments>install</arguments>
-                        </configuration>
-                    </execution>
+						<configuration>
+							<!-- arguments here -->
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
 
-                    <execution>
-                        <id>gulp bower install</id>
-                        <goals>
-                            <goal>gulp</goal>
-                        </goals>
+					<execution>
+						<id>gulp bower install</id>
+						<goals>
+							<goal>gulp</goal>
+						</goals>
 
-                        <phase>generate-resources</phase>
+						<phase>generate-resources</phase>
 
-                        <configuration>
-                            <arguments>bower</arguments>
-                        </configuration>
-                    </execution>
+						<configuration>
+							<arguments>bower</arguments>
+						</configuration>
+					</execution>
 
-                    <execution>
-                        <id>gulp default build</id>
-                        <goals>
-                            <goal>gulp</goal>
-                        </goals>
+					<execution>
+						<id>gulp default build</id>
+						<goals>
+							<goal>gulp</goal>
+						</goals>
 
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <!-- optional: if not specified, it will run gulp's default task (and you can remove this whole <configuration> section.) -->
-                            <!-- The 'production' target causes the JS code to be uglified and minified -->
-                            <arguments>--target development</arguments>
-                        </configuration>
-                        <!-- configuration omitted, use gulp default -->
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+						<phase>generate-resources</phase>
+						<configuration>
+							<!-- optional: if not specified, it will run gulp's default task (and 
+								you can remove this whole <configuration> section.) -->
+							<!-- The 'production' target causes the JS code to be uglified and 
+								minified -->
+							<arguments>--target development</arguments>
+						</configuration>
+						<!-- configuration omitted, use gulp default -->
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
-    <profiles>
-        <profile>
-            <!-- This profile is only activated when running in Eclipse. It doesn't affect the build itself- it only stores Eclipse m2e settings. -->
-            <id>only-in-eclipse</id>
-            <activation>
-                <property>
-                    <name>m2e.version</name>
-                </property>
-            </activation>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.eclipse.m2e</groupId>
-                            <artifactId>lifecycle-mapping</artifactId>
-                            <version>1.0.0</version>
-                            <configuration>
-                                <lifecycleMappingMetadata>
-                                    <pluginExecutions>
-                                        <pluginExecution>
-                                            <pluginExecutionFilter>
-                                                <groupId>org.codehaus.mojo</groupId>
-                                                <artifactId>build-helper-maven-plugin</artifactId>
-                                                <versionRange>[1.9.1,)</versionRange>
-                                                <goals>
-                                                    <goal>add-resource</goal>
-                                                    <goal>add-test-source</goal>
-                                                    <goal>add-test-resource</goal>
-                                                </goals>
-                                            </pluginExecutionFilter>
-                                            <action>
-                                                <ignore></ignore>
-                                            </action>
-                                        </pluginExecution>
-                                        <!-- By default this plugin runs the gulp goal as part of incremental builds. In our development process, a frontend developer 
-                                            will run 'gulp watch' in a separate shell while developing, and the Eclipse incremental builder will interfere with that. -->
-                                        <!-- <pluginExecution> <pluginExecutionFilter> <groupId>com.github.eirslett</groupId> <artifactId>frontend-maven-plugin</artifactId> 
-                                            <versionRange>[0.0.23,)</versionRange> <goals> <goal>gulp</goal> </goals> </pluginExecutionFilter> <action> <execute> <runOnIncremental>false</runOnIncremental> 
-                                            </execute> </action> </pluginExecution> -->
-                                    </pluginExecutions>
-                                </lifecycleMappingMetadata>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
-        </profile>
-    </profiles>
+	<profiles>
+		<profile>
+			<!-- This profile is only activated when running in Eclipse. It doesn't 
+				affect the build itself- it only stores Eclipse m2e settings. -->
+			<id>only-in-eclipse</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>org.codehaus.mojo</groupId>
+												<artifactId>build-helper-maven-plugin</artifactId>
+												<versionRange>[1.9.1,)</versionRange>
+												<goals>
+													<goal>add-resource</goal>
+													<goal>add-test-source</goal>
+													<goal>add-test-resource</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+										<!-- By default this plugin runs the gulp goal as part of incremental 
+											builds. In our development process, a frontend developer will run 'gulp watch' 
+											in a separate shell while developing, and the Eclipse incremental builder 
+											will interfere with that. -->
+										<!-- <pluginExecution> <pluginExecutionFilter> <groupId>com.github.eirslett</groupId> 
+											<artifactId>frontend-maven-plugin</artifactId> <versionRange>[0.0.23,)</versionRange> 
+											<goals> <goal>gulp</goal> </goals> </pluginExecutionFilter> <action> <execute> 
+											<runOnIncremental>false</runOnIncremental> </execute> </action> </pluginExecution> -->
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.ibm.tools.target</groupId>
-            <artifactId>was-liberty</artifactId>
-            <version>8.5.x.1</version>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-validator</groupId>
-            <artifactId>commons-validator</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.3</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.solr</groupId>
-            <artifactId>solr-solrj</artifactId>
-            <version>5.2.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>log4j</groupId>
-                    <artifactId>log4j</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.3.6</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>18.0</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.3.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>1.10.8</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-core</artifactId>
-            <version>5.2.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.watson.search</groupId>
-            <artifactId>client-commons</artifactId>
-            <version>1.0.9</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.watson.search</groupId>
-            <artifactId>http-client</artifactId>
-            <version>1.0.9</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>2.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-core-asl</artifactId>
-            <version>1.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-            <version>4.3.6</version>
-        </dependency>
-    </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>ibm_rnr_commons</groupId>
+			<artifactId>ibm_rnr_commons</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/libs/client-commons-1.0.13.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>ibm_rnr_client</groupId>
+			<artifactId>ibm_rnr_client</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/libs/http-client-1.0.13.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.tools.target</groupId>
+			<artifactId>was-liberty</artifactId>
+			<version>8.5.x.1</version>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.3</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>5.2.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.10.8</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>5.2.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.3.6</version>
+		</dependency>
+	</dependencies>
 </project>

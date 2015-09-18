@@ -6,6 +6,8 @@ The application uses the Watson Retrieve and Rank service to find 'hits' (result
 ## How it works
 The application is configured to use the "Cranfield data set" which is a public domain data set.. Further text here to explain the data, and how the ranker is trained..
 
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/retrieve-and-rank-java)
+
 ## Before you begin
 Ensure that you have the following prerequisites before you start:
 * An IBM Bluemix account. If you don't have one, sign up for it [here](https://apps.admin.ibmcloud.com/manage/trial/bluemix.html?cm_mmc=WatsonDeveloperCloud-_-LandingSiteGetStarted-_-x-_-CreateAnAccountOnBluemixCLI). For more information about the process, see [Developing Watson applications with Bluemix](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/getting_started/gs-bluemix.shtml).
