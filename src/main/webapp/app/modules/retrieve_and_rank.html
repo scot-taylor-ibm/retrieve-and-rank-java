@@ -128,21 +128,13 @@
 						<div class="results--basic-info">
 							<div class="results--item-text">
 								{{rank.title}}
-								<span class="icon icon-see_more results--see-more" ng-click="rnrController.showMore($event)"></span>
+								<span class="icon icon-see_more results--see-more" ng-click="rnrController.toggleContent($event)"></span>
 							</div>
 							<div class="results--item-score">
 								<div class="results--item-score-title">
 									Domain expert review
 								</div>
 								<div class="results--item-score-value">
-									<!-- <div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 0}">
-									</div>
-									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 1}">
-									</div>
-									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 2}">
-									</div>
-									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 3}">
-									</div> -->
 									<div class="results--item-score-bar" ng-class="{{rank.relevance}} > 0 ? 'green':''">
                                     </div>
                                     <div class="results--item-score-bar" ng-class="{{rank.relevance}} > 1 ? 'green':''">
@@ -174,7 +166,7 @@
 						<div class="results--basic-info">
 							<div class="results--item-text">
 								{{retrieved.title}}
-								<span class="icon icon-see_more results--see-more" ng-click="rnrController.showMore($event)"></span>
+								<span class="icon icon-see_more results--see-more" ng-click="rnrController.toggleContent($event)"></span>
 							</div>
 							<div class="results--item-score">
 								<div class="results--item-score-title">
