@@ -123,7 +123,7 @@
             </h3> -->
             <h3 class="base--h3">Output</h3>
 			<p class="base--p">
-				In this demo, you can compare the machine learning search results(Retrieve and Rank) and the standard search results(Solr).
+				In this demo, you can compare the machine learning search results (Retrieve and Rank) and the standard search results (Solr).
 			</p>
             <!-- <h4>Search results without training</h4> -->
            <!--  <p>The results below are based on manually tuned rules for document relevance.</p> -->
@@ -132,7 +132,7 @@
 					Machine learning search
 				</div>
 			</div>
-			<div class="results">
+			<!-- <div class="results">
 				<div class="results--item-container" ng-repeat="rank in rnrController.ranked">
 					<div class="results--item-rank">
 						{{rank.solrRank - $index - 1}}
@@ -156,10 +156,45 @@
 						</div>
 					</div>
 				</div>
-				<div class="results--space"></div>
+			</div> -->
+			<div class="results">
+				<div class="results--item" ng-repeat="rank in rnrController.ranked">
+					<div class="results--item-container">
+						<div class="results--item-rank">
+							<span class="results--increase-icon results--increase-icon_UP icon icon-arrow_up"></span>
+							<span class="results--increase-value">{{rank.solrRank - $index - 1}}</span>
+						</div>
+						<div class="results--basic-info">
+							<div class="results--item-text">
+								{{rank.title}}
+								<span class="icon icon-see_more results--see-more"></span>
+							</div>
+							<div class="results--item-score">
+								<div class="results--item-score-title">
+									Domain expert review
+								</div>
+								<div class="results--item-score-value">
+									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 0}">
+									</div>
+									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 1}">
+									</div>
+									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 2}">
+									</div>
+									<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 3}">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="results--more-info">
+							<blockquote class="results--item-details base--blockquote">
+								{{rank.body}}
+							</blockquote>
+						</div>
+					</div>
+				</div>
 			</div>
 
-            <!-- <table class="rnr-results-table">
+          <!--   <table class="rnr-results-table">
                 <tr>
                     <th class="rnr-results-table-header">Retrieve Results</th>
                     <th class="rnr-results-rank-col">Index when Ranked</th>
