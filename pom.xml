@@ -198,21 +198,18 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/libs/http-client-1.0.13.jar</systemPath>
 		</dependency>
+		 <!-- 
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.5.3</version>
+			<groupId>com.ibm.watson.search</groupId>
+			<artifactId>client-commons</artifactId>
+			<version>1.0.13</version>
 		</dependency>
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.5.3</version>
+			<groupId>com.ibm.watson.search</groupId>
+			<artifactId>http-client</artifactId>
+			<version>1.0.13</version>
 		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<version>2.5.3</version>
-		</dependency>
+		  -->
 		<dependency>
 			<groupId>com.ibm.tools.target</groupId>
 			<artifactId>was-liberty</artifactId>
@@ -245,21 +242,6 @@
 			<artifactId>gson</artifactId>
 			<version>2.3</version>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.solr</groupId>
-			<artifactId>solr-solrj</artifactId>
-			<version>5.2.1</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
