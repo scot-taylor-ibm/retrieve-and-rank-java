@@ -1,5 +1,5 @@
 applications:
-  disk_quota: 1024M
+- disk_quota: 1024M
   host: watson-rnr-demo
   name: watson-rnr-demo
   path: target/rnr-demo.war
