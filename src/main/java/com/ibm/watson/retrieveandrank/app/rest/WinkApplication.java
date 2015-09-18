@@ -24,9 +24,6 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/api/*")
 /**
  * The apache Wink application which registers the REST API endpoint classes.
- * 
- * @author doconnor
- *
  */
 public class WinkApplication extends Application {
     /*

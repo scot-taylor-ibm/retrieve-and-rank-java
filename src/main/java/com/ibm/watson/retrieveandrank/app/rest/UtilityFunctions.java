@@ -38,13 +38,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * @author Ashima Arora
- *         <p>
- *         Utility class.
- *         </p>
- *         <p>
- *         This class contains helper methods used by proxy classes {@code SearchTheMovieDbProxyResource} and {@code WDSBlueMixProxyResource}.
- *         </p>
+ * A utility class for creating HTTP client builders and loggers etc..
  */
 public final class UtilityFunctions {
     static Logger logger = LogManager.getLogger("watson.retrieve.and.rank.demo.logger"); //$NON-NLS-1$
