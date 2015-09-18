@@ -45,7 +45,6 @@
 
         self.submit = function () {
             var promise = null;
-            var top = null;
             if (!self.userQuery) {
                 return;
             }
@@ -60,8 +59,6 @@
                 delete self.userQuery;
                 delete self.queryId;
             });
-            top = document.getElementById('inputSection').offsetTop;
-            window.scrollTo(0, top);
         };
 
         self.toggleContent = function (event) {

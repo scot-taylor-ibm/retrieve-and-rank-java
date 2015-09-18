@@ -9,6 +9,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/config"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/scripts"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         
         <property name="java-output-path" value="/retrieve_and_rank_app/target/classes"/>
         <property name="component.exclusion.patterns" value="app/"/>
