@@ -59,33 +59,25 @@
                 delete self.userQuery;
                 delete self.queryId;
             });
+            self.scroll();
         };
 
-        self.showMore = function (event) {
+        self.toggleContent = function (event) {
             var target = null;
+            var myself = null;
+            var resultsItemContainer = null;
             if (event && event.target) {
                 target = event.target;
-                target = target.parentElement;
-                target.style.display = 'none';
-                target.nextSibling.style.display = 'block';
+                myself = $(target);
+                resultsItemContainer = myself.closest('.results--item-container');
+                myself.toggleClass('results--see-more_SHOW');
+                resultsItemContainer.find('.results--more-info').toggle('slow');
             }
         };
 
-        self.showLess = function (event) {
-            var target = null;
-            if (event && event.target) {
-                target = event.target;
-                target = target.parentElement;
-                target.style.display = 'none';
-                target.previousSibling.style.display = 'block';
-            }
+        self.scroll = function () {
+            window.scrollTo(0, 40);
         };
-
-        $scope.$watch(function () {
-            return self.selectedQuery;
-        }, function () {
-            //self.sampleClicked(self.selectedQuery);
-        }, false);
     };
 
     angular.module('rnr.controller', [ 'gettext', 'lodash', 'ngRoute', 'ngSanitize', 'rnr.service' ]).config(

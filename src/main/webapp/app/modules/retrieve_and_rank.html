@@ -69,10 +69,10 @@
 					<a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/retrieve-rank/" class="base--a" target='_blank'>Documentation</a>
 				</li>
 				<li class="base--li banner--service-link-item">
-					<a href="[NEED LINK HERE]" class="base--a" target='_blank'>Fork and Deploy on Bluemix</a>
+					<a href="https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/retrieve-and-rank-java" class="base--a" target='_blank'>Fork and Deploy on Bluemix</a>
 				</li>
 				<li class="base--li banner--service-link-item">
-					<a href="[NEED LINK HERE]" class="base--a" target='_blank'>Fork on Github</a>
+					<a href="https://github.com/watson-developer-cloud/retrieve-and-rank-java" class="base--a" target='_blank'>Fork on Github</a>
 				</li>
 			</div>
 		</div>
@@ -80,22 +80,22 @@
 </div>
 <div class="_demo--container">
 	<article class="_content base--article">
-		<h2 class="base--h2">
-			Compare machine learning search and standard search
+		<h2 id="title" class="base--h2">
+			Compare machine learning approach and standard search
 		</h2>
 		<p class="base--p">
 			This service was trained on part of the <a href="http://ir.dcs.gla.ac.uk/resources/test_collections/cran/" class="base--a" target='_blank'>Cranfield Collection</a> data. The collection contains questions paired with answers about aerodynamics.
 		</p>
 
-		<h3 class="base--h3">
+		<h3 id="inputSection" class="base--h3">
 			Input
 		</h3>
 
 		<div class="input">
 			<form role="form" ng-submit="rnrController.submit()">
-				<a href="" class="input--question-generator base--a" ng-model="rnrController.userQuery" ng-click="rnrController.sampleClicked()">
+				<div class="input--question-generator base--a" ng-model="rnrController.userQuery" ng-click="rnrController.sampleClicked()" style="cursor: pointer;">
 	                Get a random question about aerodynamics
-	            </a>
+	            </div>
 	            <div class="input--container">
 	                <p id="query" class="input--question base--p">{{rnrController.queryTxt}}</p>
 	            </div>
@@ -103,124 +103,95 @@
 		</div>
 
 	</article>
-	
+
 </div>
 
-<div ng-if="rnrController.retrieved">
-<div class="output">
-	<div class="_demo--container">
-
-
-      <!--   <form role="form" ng-submit="rnrController.submit()">
-        <select name="repeatSelect" ng-model="rnrController.userQuery" ng-change="rnrController.sampleClicked()" ng-options="q.query for q in rnrController.sampleQueries">
-        </select>
-            <input class="form-control rnr-query-input" id="query" type="text" placeholder="Type your query here" ng-model="rnrController.query"
-                autocorrect="off" autocomplete="off" />
-        </form> -->
-        <!-- <div ng-if="rnrController.retrieved"> -->
-            <!-- <h3>
-                Comparing Results for: <span class="rnr-query">"{{rnrController.query}}"</span>
-            </h3> -->
-            <h3 class="base--h3">Output</h3>
+<div ng-if="rnrController.retrieved" style="margin-top: 0;">
+	<div class="output">
+		<div class="_demo--container">
+            <h3 class="base--h3" style="margin-top: 0.3em">Output</h3>
 			<p class="base--p">
-				In this demo, you can compare the machine learning search results(Retrieve and Rank) and the standard search results(Solr).
+				You can compare the machine learning approach (Retrieve and Rank) and the standard search results (Solr).
 			</p>
-            <!-- <h4>Search results without training</h4> -->
-           <!--  <p>The results below are based on manually tuned rules for document relevance.</p> -->
             <div class="toggle">
 				<div class="toggle--item active">
-					Machine learning search
+					Machine learning approach
 				</div>
 			</div>
 			<div class="results">
-				<div class="results--item-container" ng-repeat="rank in rnrController.ranked">
-					<div class="results--item-rank">
-						{{rank.solrRank - $index - 1}}
-					</div>
-					<div class="results--item-text">
-						{{rank.title}}
-					</div>
-					<div class="results--item-score">
-						<div class="results--item-score-title">
-							Domain expert review
+				<div class="results--item" ng-repeat="rank in rnrController.ranked">
+					<div class="results--item-container">
+						<div class="results--item-rank">
+							<span class="results--increase-icon icon" ng-class="{'results--increase-icon_UP': {{rank.solrRank - $index - 1}} >= 0, 'icon-arrow_up': {{rank.solrRank - $index - 1}} >= 0, 'results--increase-icon_DOWN': {{rank.solrRank - $index - 1}} < 0, 'icon-arrow_down': {{rank.solrRank - $index - 1}} < 0}"></span>
+							<span class="results--increase-value">{{rank.solrRank - $index - 1 >= 0 ? rank.solrRank - $index - 1 : 1 + $index - rank.solrRank}}</span>
 						</div>
-						<div class="results--item-score-value">
-							<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 0}">
+						<div class="results--basic-info">
+							<div class="results--item-text">
+								{{rank.title}}
+								<span class="icon icon-see_more results--see-more" ng-click="rnrController.toggleContent($event)"></span>
 							</div>
-							<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 1}">
+							<div class="results--item-score">
+								<div class="results--item-score-title">
+									Domain expert review
+								</div>
+								<div class="results--item-score-value">
+									<div class="results--item-score-bar" ng-class="{{rank.relevance}} > 0 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{rank.relevance}} > 1 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{rank.relevance}} > 2 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{rank.relevance}} > 3 ? 'green':''">
+                                    </div>
+								</div>
 							</div>
-							<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 2}">
-							</div>
-							<div class="results--item-score-bar" ng-class="{'green': {{rank.relevance}} > 3}">
-							</div>
+						</div>
+						<div class="results--more-info">
+							<blockquote class="results--item-details base--blockquote">
+								{{rank.body}}
+							</blockquote>
 						</div>
 					</div>
 				</div>
-				<div class="results--space"></div>
 			</div>
 
-            <!-- <table class="rnr-results-table">
-                <tr>
-                    <th class="rnr-results-table-header">Retrieve Results</th>
-                    <th class="rnr-results-rank-col">Index when Ranked</th>
-                    <th class="rnr-results-rank-col">GT Relevance</th>
-                </tr>
-                <tr ng-repeat="retrieved in rnrController.retrieved">
-                    <td class="rnr-results-table-cell"><b>{{retrieved.title}}</b>
-                        <hr />
-                        <body-text content="{{retrieved.body}}"></body-text></td>
-                    <td class="rnr-results-table-cell-score"><span>{{retrieved.finalRank > -1 ? retrieved.finalRank : "N/A"}}</span></td>
-                    <td class="rnr-results-table-cell-score"><span ng-if="retrieved.relevance > -1" class="rnr-circle-{{retrieved.relevance}}">{{retrieved.relevance
-                            > -1 ? retrieved.relevance : "N/A"}}</span></td>
-                </tr>
-            </table> -->
-
-            <!-- <h4>Retrieve results after training</h4>
-            <p>
-                The results below are based on automatically learned rules for computing document relevance using this training set.<br> <i>Refer to
-                    our documentation to learn more about creating and using your own training data set.</i>
-            </p> -->
             <div class="toggle">
 				<div class="toggle--item active">
 					Standard search
 				</div>
 			</div>
 			<div class="results">
-				<div class="results--item-container" ng-repeat="retrieved in rnrController.retrieved">
-					<div class="results--item-text">
-						{{retrieved.title}}
-					</div>
-					<div class="results--item-score">
-						<div class="results--item-score-title">
-							Domain expert review
+				<div class="results--item" ng-repeat="retrieved in rnrController.retrieved">
+					<div class="results--item-container">
+						<div class="results--basic-info">
+							<div class="results--item-text">
+								{{retrieved.title}}
+								<span class="icon icon-see_more results--see-more" ng-click="rnrController.toggleContent($event)"></span>
+							</div>
+							<div class="results--item-score">
+								<div class="results--item-score-title">
+									Domain expert review
+								</div>
+								<div class="results--item-score-value">
+									<div class="results--item-score-bar" ng-class="{{retrieved.relevance}} > 0 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{retrieved.relevance}} > 1 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{retrieved.relevance}} > 2 ? 'green':''">
+                                    </div>
+                                    <div class="results--item-score-bar" ng-class="{{retrieved.relevance}} > 3 ? 'green':''">
+                                    </div>
+								</div>
+							</div>
 						</div>
-						<div class="results--item-score-value">
-							<div class="results--item-score-bar" ng-class="{'green': {{retrieved.relevance}} > 0}">
-							</div>
-							<div class="results--item-score-bar" ng-class="{'green': {{retrieved.relevance}} > 1}">
-							</div>
-							<div class="results--item-score-bar" ng-class="{'green': {{retrieved.relevance}} > 2}">
-							</div>
-							<div class="results--item-score-bar" ng-class="{'green': {{retrieved.relevance}} > 3}">
-							</div>
+						<div class="results--more-info">
+							<blockquote class="results--item-details base--blockquote">
+								{{retrieved.body}}
+							</blockquote>
 						</div>
 					</div>
 				</div>
 			</div>
-            <!-- <table class="rnr-results-table">
-                <tr>
-                    <th class="rnr-results-table-header">Ranked Results</th>
-                    <th class="rnr-results-rank-col">Solr index</th>
-                    <th class="rnr-results-rank-col">GT Relevance</th>
-                </tr>
-                <tr ng-repeat="rank in rnrController.ranked">
-                    <td class="rnr-results-table-cell"><b>{{rank.title}}</b>
-                        <hr>
-                        <body-text content="{{rank.body}}"></body-text></td>
-                    <td class="rnr-results-table-cell-score"><span>{{rank.solrRank}}</span></td>
-                    <td class="rnr-results-table-cell-score"><span ng-if="rank.relevance > -1" class="rnr-circle-{{rank.relevance}}">{{rank.relevance}}</span></td>
-                </tr>
-            </table> -->
         </div>
 	</div>
 </div>

@@ -29,11 +29,9 @@
         var queries = null;
 
         /**
-         * Retrieves a clientId for the API connection.
-         *
+         * Retrieves an array of sample queries to use against the service
          * @public
-         * @return {Object} The current client id and welcome message if it exists,
-         * otherwise a new one retrieved from the API.
+         * @return {Array} an array of sample queries
          */
         var getSampleQueries = function () {
             if (queries) {
@@ -49,7 +47,13 @@
                 var data = errorResponse;
            });
         };
-
+        /**
+         * Sends a pre-canned or user defined query to the service (via the server proxy).
+         * @public
+         * @param  userQuery  {String} the text entered by the user or the text of the pre-canned query
+         * @param  queryId  {Integer} an optional integer ID which can later be used for ground truth lookup
+         * @return {Object} the 'retrieved' and 'ranked' results
+         */
         var query = function (userQuery, queryId) {
             return $http.post('../api/bluemix/query', { 'query': userQuery, 'queryId': queryId }).then(function (response) {
                 var rankedResults = response.data.ranked_results;

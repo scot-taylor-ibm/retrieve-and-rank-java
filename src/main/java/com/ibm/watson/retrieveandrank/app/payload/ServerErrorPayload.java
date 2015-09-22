@@ -16,32 +16,29 @@
 package com.ibm.watson.retrieveandrank.app.payload;
 
 /**
- * <P>
- * Information associated with an exception in the server code. This class is instantiated when an exception is caught in {@code SearchTheMovieDbProxyResource}
- * and {@code WDSBlueMixProxyResource}. This object is sent as payload to the client-side for displaying error messages to the user.</p>
- * 
+ * A payload object that is sent to the client when an exception/error occurs.
+ * The payload contains a message which may be presented to the client.
  */
 public class ServerErrorPayload {
     private String message;
     /**
      * Constructor
      * 
-     * @param userErrorMessage the user-understandable message describing the exception thrown
-     * @param message the system-understandable message describing the exception thrown
+     * @param message  the error message which will be sent to the client
      */
     public ServerErrorPayload(String message) {
         this.message = message;
     }
-
     /**
-     * @return  the system-understandable message describing the exception thrown
+     * Returns the error message that will be sent to the client
+     * @return
      */
     public String getMessage() {
         return message;
     }
-
     /**
-     * @param  message the system-understandable message describing the exception thrown
+     * Sets the message that is to be sent to the client
+     * @param message
      */
     public void setMessage(String message) {
         this.message = message;
