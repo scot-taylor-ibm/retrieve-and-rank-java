@@ -80,7 +80,7 @@
 </div>
 <div class="_demo--container">
 	<article class="_content base--article">
-		<h2 class="base--h2">
+		<h2 id="title" class="base--h2">
 			Compare machine learning search and standard search
 		</h2>
 		<p class="base--p">
@@ -93,7 +93,7 @@
 
 		<div class="input">
 			<form role="form" ng-submit="rnrController.submit()">
-				<a class="input--question-generator base--a" ng-model="rnrController.userQuery" ng-click="rnrController.sampleClicked()">
+				<a class="input--question-generator base--a" ng-model="rnrController.userQuery" ng-click="rnrController.sampleClicked()" style="cursor: pointer;">
 	                Get a random question about aerodynamics
 	            </a>
 	            <div class="input--container">
