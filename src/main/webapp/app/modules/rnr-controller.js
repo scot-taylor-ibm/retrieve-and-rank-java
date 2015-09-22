@@ -59,6 +59,7 @@
                 delete self.userQuery;
                 delete self.queryId;
             });
+            self.scroll();
         };
 
         self.toggleContent = function (event) {
@@ -72,6 +73,10 @@
                 myself.toggleClass('results--see-more_SHOW');
                 resultsItemContainer.find('.results--more-info').toggle('slow');
             }
+        };
+
+        self.scroll = function () {
+            window.scrollTo(0, 40);
         };
     };
 
