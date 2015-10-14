@@ -1,152 +1,158 @@
 # Retrieve and Rank Demo app
-The IBM Watson™ Retrieve and Rank service helps users find the most relevant information for their query by using a combination of search and machine learning algorithms to detect "signals" in the data. Built on top of Apache Solr, developers load their data into the service, train a machine learning model based on known relevant results, then leverage this model to provide improved results to their end users based on their question or query.
+The IBM Watson™ Retrieve and Rank service helps users find the most relevant information for their queries by using a combination of search and machine learning algorithms to detect "signals" in the data. Developers load their data into the service, which is built on top of Apache Solr. The can train a machine learning model based on known results, and use the model to provide improved results to their end users.
 
 Here's a [quick demo](http://retrieve-and-rank-demo.mybluemix.net/rnr-demo/dist/index.html#/).
 
 ## How it works
-Like the demo, the application is configured to work with the "Cranfield" data set, which contains abstracts of articles on aerodynamics and a set of relevancy assessments (questions with known good/bad results), which are used in this case as "ground truth" for the purpose of training the machine learning model.  A percentage of the assessments are not used as part of the training process, allowing them to be used to validate the success of the results on untrained data after the training process is complete.  These questions are the ones that are selected from in the demo.
+This application uses the publicly available test data called the [Cranfield collection](http://ir.dcs.gla.ac.uk/resources/test_collections/cran/). The collection contains abstracts of aerodynamics journal articles, a set of questions about aerodynamics, and indicators of how relevant an article is to a question. Some questions are not used as training data, which means that you can use them to validate the performance of the trained ranker. This subset of questions are are used in the demo.
 
-Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix."
+Give it a try! Click this button to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix."
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/retrieve-and-rank-java)
 
 ## Before you begin
 Ensure that you have the following prerequisites before you start:
-* An IBM Bluemix account. If you don't have one, sign up for it [here](https://apps.admin.ibmcloud.com/manage/trial/bluemix.html?cm_mmc=WatsonDeveloperCloud-_-LandingSiteGetStarted-_-x-_-CreateAnAccountOnBluemixCLI). For more information about the process, see [Developing Watson applications with Bluemix](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/getting_started/gs-bluemix.shtml).
-* [Java Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/index.html) 1.7 or later releases
-* [Eclipse IDE for Java EE Developers](https://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/marsr)
-* [Apache Maven](https://maven.apache.org/download.cgi) 3.1 or later releases
-* [Git](https://git-scm.com/downloads)
+* A Bluemix account. If you don't have one, [sign up][sign_up]. Experimental Watson Services are free to use.
+* [Java Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/index.html) version 1.7 or later.
+* [Eclipse IDE for Java EE Developers](https://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/marsr).
+* [Apache Maven](https://maven.apache.org/download.cgi), version 3.1 or later.
+* [Git](https://git-scm.com/downloads).
 * [Websphere Liberty Profile server](https://developer.ibm.com/wasdev/downloads/liberty-profile-using-non-eclipse-environments/), if you want to run the app in your local environment.
 
 ## Setup
-In order to run the Retrieve and Rank demo app, you need to have a configure an instance of the Retrieve and Rank service. The following steps will guide you through the process. The instructions use Eclipse, but you can use the IDE of your choice.
+To run the Retrieve and Rank demo app, you need an app and a Retrieve and Rank service instance bound to it. The following steps use Eclipse, but you can use the IDE of your choice.
 
 ### Get the project from GitHub
-1. Clone the retrieve-and-rank-java repository from GitHub by issuing one of the following commands in your terminal:
-   ```
-   git clone https://github.com/watson-developer-cloud/retrieve-and-rank-java.git
-   ```
-   ```
-   git clone git@github.com:watson-developer-cloud/retrieve-and-rank-java.git
-   ```
-
-2. Add the newly cloned repository to your local Eclipse workspace.
+1. Create a local clone of this repository.
+2. Add the repository to your local Eclipse workspace.
 
 ### Set up the Bluemix Environment
 #### Creating an App
 1. [Log in to Bluemix](https://console.ng.bluemix.net/) and navigate to the *Dashboard* on the top panel.
 2. Create your app.
-      1. Click **CREATE AN APP**.
+      1. Click **CREATE APP**.
       2. Select **WEB**.
       3. Select the starter **Liberty for Java**, and click **CONTINUE**.
-      4. Type a unique name for your app, such as `rnr-sample-app`, and click **Finish**.
-      5. Select **CF Command Line Interface**. If you do not already have it, click **Download CF Command Line Interface**. This link opens a GitHub repository. Download and install it locally.
+      4. Type a unique name for your app, such as `rr-demo-app`, and click **Finish**.
+      5. Select **CF Command Line Interface**. 
+      6. If you haven't installed Cloud Foundry, click **Download CF Command Line Interface**. This link opens a GitHub repository. Download and install CF locally.
 
 #### Adding an instance of the Retrieve and Rank service to your App
-Complete one of the following sets of steps to add an instance of the Retrieve and Rank service. Bluemix allows you to create a new service instance to bind to your app or to bind to an existing instance. Choose one of the following ways:  
+You can create a service instance to bind to your app or bind an existing instance:  
 
-**Creating a new service instance to bind to your app**
+**Binding a new service instance to your app**
   1. [Log in to Bluemix](https://console.ng.bluemix.net/) and navigate to the *Dashboard* on the top panel. Find the app that you created in the previous section, and click it.
   2. Click **ADD A SERVICE OR API**.
-  3. Select the **Watson** category, and select the **Retrieve and Rank** service (note, initially at least the Retrieve and Rank service is housed in the 'Labs' section which requires you to click on the "Bluemix Labs Catalog" link at the bottom of the service selection page).
-  4. Ensure that your app is specified in the **App** dropdown on the right-hand side of the pop-up window under **Add Service**.
+  3. Select the **Watson** category, and select the **Retrieve and Rank** service.
+  4. Make sure that your app is specified in the **App** dropdown on the right-hand side of the pop-up window under **Add Service**.
   5. Type a unique name for your service in the **Service name** field, such as `rnr-sample-service`.
-  6. Click **CREATE**. The **Restage Application** window is displayed.
+  6. Click **CREATE**.
   7. Click **RESTAGE** to restart your app. If the app is not started, click **START**.
 
-**Binding to an existing service instance**
+Or 
+
+**Binding an existing service instance**
   1. [Log in to Bluemix](https://console.ng.bluemix.net/) and navigate to the *Dashboard* on the top panel. Locate and click on the app you created in the previous section.
   2. Click **BIND A SERVICE OR API**.
-  3. Select the existing Retrieve and Rank service that you want to bind to your app, and click **ADD**. The **Restage Application** window is displayed.
+  3. Select the Retrieve and Rank service that you want to bind to your app, and click **ADD**.
   4. Click **RESTAGE** to restart your app.  
+  5. To validate that your app is running and available, open http://{yourAppName}.mybluemix.net where {yourAppName} is the name of your app. For example, http://rr-demo-app.mybluemix.net/
 
-#### Training the Service
-Now that we have a Retrieve and Rank instance bound to the app, we can use the credentials we received in the previous step to configure and train the service. The following document, <a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/retrieve-rank/get_start.shtml" target="_blank">Getting started with the Retrieve and Rank service</a>, explains how to configure the service, create a document collection, upload a corpus of data, and create and train a ranker. Please make sure to carefully follow the steps in the document, taking note of the following artifacts:   
-1. Cluster ID   
-2. Collection name   
-3. Ranker ID   
+#### Training the Service by completing the tutorial
+Configure the service to use the Cranfield collection and train a ranker with the Cranfield data.
+
+* Complete the tutorial in <a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/retrieve-rank/get_start.shtml" target="_blank">Getting started with the Retrieve and Rank service</a>.     
+* As you complete the tutorial, save this information:
+  * Solr cluster ID: This unique identifier of the Apache Solr Cluster that you create.
+  * Collection name: The name you give to the Solr collection when you create it.  
+  * Ranker ID: The unique identifier of the ranker you create.
 
 
 #### Setting up environment variables in Bluemix
-  In order to run the Retrieve and Rank demo application on Bluemix three environment variables are required:  
-  1. **CLUSTER_ID**: This is the Apache Solr Cluster ID that is generated by the service. The cluster ID should have been noted while configuring the service in **Stage 2** of the _**Training the Service**_ section above.    
-  2. **COLLECTION_NAME**: This is the Apache Solr collection name that is provided to the service. The collection name should have been noted while configuring the service in **Stage 3** of the _**Training the Service**_ section above.   
-  3. **RANKER_ID**: This is the Ranker ID that is returned by the service. The Ranker ID should have been noted while configuring the service in **Stage 4** of the _**Training the Service**_ section above.   
+Use the values from the tutorial to specify environment variables in your app:
+1. Navigate to the application dashboard in Bluemix. 
+2. Click the Retrieve and Rank application you created earlier. 
+3. Click **Environment Variables**. 
+4. Click **USER-DEFINED**. 
+5. Add three environment variables. Use the values that you copied from the tutorial:
 
-Navigate to the application dashboard in Bluemix. Locate and click on the application you created previously. Navigate to the _**Environment Variables**_ section of the UI. Switch to the _**USER-DEFINED**_ tab within the UI. Add three new environment variables as specified above, **CLUSTER_ID** as the key for one, with its value being the cluster ID assigned to the Solr Cluster. **COLLECTION_NAME** as the key for the second variable, its value being that of the Solr Document Collection and the final key being **RANKER_ID**, its value being the system generated ID of the trained ranker.  
-
-To view the home page of the app, open https://yourAppName.mybluemix.net where yourAppName is the name of your app.
+  * CLUSTER_ID
+  * COLLECTION_NAME
+  * RANKER_ID
 
 ### Build the app
-This project is configured to be built with Maven. To deploy the app, complete the following steps in order:
-  1. In your Eclipse window, expand the *retrieve-and-rank-java* project that you cloned from GitHub.
-  2. Right-click the project and select `Maven -> Update Project` from the context menu to update Maven dependencies.
-  3. Keep the default options, and click **OK**.
-  4. Navigate to the location of your default deployment server. For Websphere Liberty, it would be something like *../LibertyRuntime/usr/servers/<server-name>*. Open the `server.env` file(create one if it doesn't exist), and update the following entries:
-    * **VCAP_SERVICES**. This entry should contain a JSON object obtained from the *Environment Variables* section of your application on Bluemix. When entering the JSON in the server.env file make sure it is formatted to be in one line.
-    * **CLUSTER_ID**. Specify the ID value that corresponds to your Solr cluster created as a part of the _**Training the Service**_ section above(the cluster id is a long alpha-numeric string).   
-    * **COLLECTION_NAME**. Specify the name value that corresponds to your Solr document collection as a part of the _**Training the Service**_ section above.   
-    * **RANKER_ID**. Specify the ID value that corresponds to your Ranker created as a part of the _**Training the Service**_ section above(the ranker id is a long alpha-numeric string).   
-    Finally, the server.env should look something like this:
-   
-
+This project is configured to be built with Maven.
+1. In your Eclipse window, expand the *retrieve-and-rank-java* project that you cloned from GitHub.
+2. Right-click the project and select `Maven -> Update Project` to update Maven dependencies.
+3. Keep the default options, and click **OK**.
+4. Navigate to the location of your default deployment server. For Websphere Liberty, it is located in a location similar to this: *../LibertyRuntime/usr/servers/{server-name}*.
+5. Open the `server.env` file (create one if it doesn't exist), and set the following entries:
+  
+  * VCAP_SERVICES: Add the JSON object that is displayed in the *Environment Variables* section of your application on Bluemix. When you add the JSON here, format it on one line.
+  * For CLUSTER_ID, COLLECTION_NAME, and RANKER_ID, use the same values that you used for the environment variables in your app on Bluemix.
+    
+    For example:
     ```
-    VCAP_SERVICES={"retrieve_and_rank": [{"name": "Watson Retrieve and Rank","label": "retrieve_and_rank","plan": "standard","credentials": {"url": "https://gateway.watsonplatform.net/retrieveandrank/api", "username": "system_generated_username", "password": "system_generated_password" } } ] }
-CLUSTER_ID=system_generated_cluster_id
-COLLECTION_NAME=user_provided_collection_name
-RANKER_ID=system_generated_ranker_id
+    VCAP_SERVICES={"retrieve_and_rank": [{"name": "rr-demo-app","label": "retrieve_and_rank","plan": "standard","credentials": {"url": "https://gateway.watsonplatform.net/retrieveandrank/api", "username": "{username}", "password": "{password}" } } ] }
+    CLUSTER_ID=_{cluster_id}
+    COLLECTION_NAME={collection_name}
+    RANKER_ID={ranker_id}
     ```
-  5. Switch to the navigator view in Eclipse, right-click the `pom.xml`, and select `Run As -> Maven Install`. Installation of Maven begins. During the installation, the following tasks are done:
-    * The JS code is compiled. That is, the various Angular JS files are aggregated, uglified, and compressed. Various other pre-processing is performed on the web code, and the output is copied to the `retrieve-and-rank-java/src/main/webapp/dist` folder in the project.
-    * The Java code is compiled, and JUnit tests are executed against the Java code. The compiled Java and JavaScript code and various other artifacts that are required by the web project are copied to a temporary location, and a `.war` file is created.   
-
-This WAR file that resides in */retrieve-and-rank-java/target directory* will be used to deploy the application on Bluemix in the next section.
+    
+6. Switch to the navigator view in Eclipse. 
+7. Right-click the `pom.xml` file, and select `Run As -> Maven Install`. Installation of Maven begins. During the installation, the following tasks are completed:
+    * The JS code is compiled. The various Angular JS files are aggregated, uglified, and compressed. Various other pre-processing is performed on the web code, and the output is copied to the `retrieve-and-rank-java/src/main/webapp/dist` folder in the project.
+    * The Java code is compiled, and JUnit tests are executed against the Java code. The compiled Java and JavaScript code and various other artifacts that are required by the web project are copied to a temporary location, and a `.war` file is created in */retrieve-and-rank-java/target directory*. This WAR file is used to deploy the application on Bluemix in the next section.
 
 
 ### Deploy the app
 You can run the application on a local server or on Bluemix. Choose one of the following methods, and complete the steps:
 #### Deploying the app on your local server in Eclipse
-1. Start Eclipse, and click `Window -> Show View -> Servers`.
-2. In the **Servers** view, right-click and select `New -> Server`. The *Define a New Server* window is displayed.
-3. Select the **WebSphere Application Server Liberty Profile**, and click **Next**.  
+1. In Eclipse, click `Window -> Show View -> Servers`.
+2. In the **Servers** view, right-click and select `New -> Server`.
+3. Select the **WebSphere Application Server Liberty Profile** in the *Define a New Server* window and click **Next**.  
 4. Configure the server with the default settings.  
-5. In the **Available** list in the **Add and Remove** dialog, select the *retrieve-and-rank-java* project, and click **Add >**. The project is added to the runtime configuration for the server in the **Configured** list.
+5. In the **Available** list in the **Add and Remove** dialog, select the *retrieve-and-rank-java* project and click **Add >**. The project is added to the runtime configuration for the server in the **Configured** list.
 6. Click **Finish**.
-7. Copy the *server.env* file which was edited previously from *retrieve-and-rank-java/src/it/resources/server.env* to the root folder of the newly defined server (i.e. *wlp/usr/defaultserver/server.env*).  
-8. Start the new server, and open http://localhost:serverPort/rnr-demo/dist/index.html#/ in your favorite browser, where yourAppName is the specific name of your app.
+7. Copy the *server.env* file, which you edited earlier, from *retrieve-and-rank-java/src/it/resources/server.env* to the root folder of the newly defined server (For example, *wlp/usr/defaultserver/server.env*).  
+8. Start the new server, and open http://localhost:serverPort/rnr-demo/dist/index.html#/ in your favorite browser, where {yourAppName} is the specific name of your app.
 9. Execute the queries against the service!
+
+Or
 
 #### Deploying the app on the Websphere Liberty Profile in Bluemix
 Deploy the WAR file that you built in the previous section by using Cloud Foundry commands.
 1. Open the command prompt.
-2. Navigate to the directory that contains the WAR file you that you generated by running the following command in the terminal:
-   ```
-   cd retrieve-and-rank-java/target
-   ```
 
-3. Connect to Bluemix by running the following command:
-   ```
-   cf api https://api.ng.bluemix.net
-   ```
+2. Navigate to the directory that contains the WAR file that you generated:
+  
+  ```sh
+  $ cd retrieve-and-rank-java/target
+  ```
+  
+3. Connect to Bluemix:
 
-4. Log in to Bluemix by running the following command,
-   ```
-   cf login -u <yourUsername> -o <yourOrg> -s <yourSpace>
-   ```
-where *yourUsername* is your Bluemix id, *yourOrg* is your organization name in Bluemix and *yourSpace* is your space name in Bluemix.
-5. Deploy the app to Bluemix by running the following command.
-   ```
-   cf push <yourAppName> -p rnr-demo.war
-   ```
-where, *yourAppName* is the name of your app.
-6. Navigate to [Bluemix](https://console.ng.bluemix.net/) to make sure the app is started. If not, click START.
-7. To view the home page of the app, open https://yourAppName.mybluemix.net/rnr-demo/dist/index.html#/ where yourAppName is the specific name of your app.
-8. Execute the queries against the service!
+  ```sh
+  $ cf api https://api.ng.bluemix.net
+  $ cf login -u {your user ID}
+  ```
+  
+4. Deploy the app to Bluemix:
 
+  ```sh
+  $ cf push {yourAppName} -p rnr-demo.war
+  ```
 
+  where {yourAppName} is the name of your app.
+  
+6. Navigate to [Bluemix](https://console.ng.bluemix.net/) to make sure the app is started. Click *Start*, if necessary.
+7. Open http://{yourAppName}.mybluemix.net/rnr-demo/dist/index.html#/ in your browser, where {yourAppName} is the specific name of your app.
+8. Execute queries against the service.
 
 ## Reference information
 * Retrieve and Rank service [documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/retrieve-rank/)
 * [Configuring](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/retrieve-rank/configure.shtml) the Retrieve and Rank service
 * Retrieve and Rank [API reference](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/retrieve-and-rank/api/v1/)
+
+[sign_up]: https://apps.admin.ibmcloud.com/manage/trial/bluemix.html?cm_mmc=WatsonDeveloperCloud-_-LandingSiteGetStarted-_-x-_-CreateAnAccountOnBluemixCLI
+[cloud_foundry]: https://github.com/cloudfoundry/cli
