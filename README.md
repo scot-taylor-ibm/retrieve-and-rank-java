@@ -1,10 +1,12 @@
 # Retrieve and Rank Demo app
-The Retrieve and Rank demo application shows how to use a machine learning model on top of Solr to provide improved results. Here's a [quick demo](http://retrieve-and-rank-demo.mybluemix.net/rnr-demo/dist/index.html#/).
+The IBM Watson™ Retrieve and Rank service helps users find the most relevant information for their query by using a combination of search and machine learning algorithms to detect "signals" in the data. Built on top of Apache Solr, developers load their data into the service, train a machine learning model based on known relevant results, then leverage this model to provide improved results to their end users based on their question or query.
 
-The Retrieve and Rank service helps users find the most relevant information for their query by using a combination of search and machine learning algorithms to detect "signals" in the data. Built on top of Apache Solr, developers load their data into the service, train a machine learning model based on known relevant results, then leverage this model to provide improved results to their end users based on their question or query.
+Here's a [quick demo](http://retrieve-and-rank-demo.mybluemix.net/rnr-demo/dist/index.html#/).
 
 ## How it works
-The application is configured to use the "Cranfield data set" which is a public domain data set.. Further text here to explain the data, and how the ranker is trained..
+Like the demo, the application is configured to work with the "Cranfield" data set, which contains abstracts of articles on aerodynamics and a set of relevancy assessments (questions with known good/bad results), which are used in this case as "ground truth" for the purpose of training the machine learning model.  A percentage of the assessments are not used as part of the training process, allowing them to be used to validate the success of the results on untrained data after the training process is complete.  These questions are the ones that are selected from in the demo.
+
+Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix."
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/retrieve-and-rank-java)
 
