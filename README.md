@@ -118,8 +118,8 @@ You can run the application on a local server or on Bluemix. Choose one of the f
 5. In the **Available** list in the **Add and Remove** dialog, select the *retrieve-and-rank-java* project and click **Add**. The project is added to the runtime configuration for the server in the Configured list.
 6. Click **Finish**.
 7. Copy the `server.env` file, which you edited earlier, from *retrieve-and-rank-java/src/it/resources/server.env* to the root folder of the newly defined server (For example, *wlp/usr/defaultserver/server.env*).  
-8. Start the new server, and open http://localhost:serverPort/rnr-demo/dist/index.html#/ in your favorite browser, where {yourAppName} is the specific name of your app.
-9. Execute the queries against the service!
+8. Start the new server, and open http://localhost:serverPort/{yourAppName}/dist/index.html#/ in your favorite browser, where {yourAppName} is the specific name of your app.
+9. Query the service
 
 Or
 
@@ -150,7 +150,7 @@ Deploy the WAR file that you built in the previous section by using Cloud Foundr
   
 6. Navigate to [Bluemix](https://console.ng.bluemix.net/) to make sure the app is started. Click **Start**, if necessary.
 7. Open http://{yourAppName}.mybluemix.net/rnr-demo/dist/index.html#/ in your browser, where {yourAppName} is the specific name of your app.
-8. Execute queries against the service.
+8. Query the service.
 
 ## Reference information
 * Retrieve and Rank service [documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/retrieve-rank/)
